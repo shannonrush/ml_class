@@ -26,11 +26,7 @@ X = [ones(m, 1) X];
 %       for each row.
 % 
 
-z = sigmoid(X*all_theta'); % size is 5000 x 10
-for i=1:m
-	[val,index] = max(z(i,:));
-	p(i)=index;
-end
+[v,p]=max(sigmoid(X*all_theta')');
 
 % =========================================================================
 
