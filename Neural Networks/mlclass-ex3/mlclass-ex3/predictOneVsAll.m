@@ -24,13 +24,13 @@ X = [ones(m, 1) X];
 %       max element, for more information see 'help max'. If your examples 
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
-%       
+% 
 
-
-
-
-
-
+z = sigmoid(X*all_theta'); % size is 5000 x 10
+for i=1:m
+	[val,index] = max(z(i,:));
+	p(i)=index;
+end
 
 % =========================================================================
 
