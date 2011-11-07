@@ -21,8 +21,8 @@ m = size(X, 1);
 new_y = zeros(5000, 10);
 % You need to return the following variables correctly 
 J = 0;
-Theta1_grad = zeros(size(Theta1));
-Theta2_grad = zeros(size(Theta2));
+Theta1_grad = zeros(size(Theta1)); % 25 x 401
+Theta2_grad = zeros(size(Theta2)); % 10 x 26
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
@@ -85,7 +85,7 @@ J = J + regular;
 
 for t=1:m
 	a1 = [1, X(t,:)]; % 1 x 401
-	z2 = a1*Theta1';
+	z2 = [a1*Theta1']; % 1 x 25
 	a2 = sigmoid(z2);
 	a2 = [ones(rows(a2),1) a2];
 	z3 = a2*Theta2';
@@ -95,17 +95,11 @@ for t=1:m
 	for k=1:K
 		d3(k) = (a3(k)-new_y(t,k));
 	end
-	d2 = (Theta2'*d3').*sigmoidGradient(z2);
-	d2 = d2(2:end);
-	Theta1_grad = Theta1_grad + d2 * a1';
-	Theta2_grad = Theta2_grad + d3 * a2';
+	d2 = (Theta2'*d3').*sigmoidGradient([1,z2]'); % needs to be 26 x 1
+	d2 = d2(2:end); % d2 needs to be 25 x 1
+	Theta1_grad = Theta1_grad + d2 * a1; % 25 x 401 + 25 x 1 * 1 x 401
+	Theta2_grad = Theta2_grad + d3' * a2;
 end
-Theta1_grad = Theta1_grad/m;
-Theta2_grad = Theta2_grad/m;
-
-
-
-
 
 %
 % Part 3: Implement regularization with the cost function and gradients.
@@ -114,25 +108,11 @@ Theta2_grad = Theta2_grad/m;
 %               backpropagation. That is, you can compute the gradients for
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
-%
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1(:,1) = 0;
+Theta2(:,1) = 0;
+Theta1_grad = (Theta1_grad/m)+((lambda/m)*Theta1);
+Theta2_grad = (Theta2_grad/m)+((lambda/m)*Theta2);
 
 % -------------------------------------------------------------
 
