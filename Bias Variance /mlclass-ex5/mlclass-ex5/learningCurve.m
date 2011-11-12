@@ -55,12 +55,24 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
+for i=1:m
+	subsetX=X(1:i,:); 
+	subsetY=y(1:i,:);
+	theta=trainLinearReg(subsetX,subsetY,lambda);
+	error_train(i)=linearRegCostFunction(subsetX,subsetY,theta,0);
+	error_val(i)=linearRegCostFunction(Xval,yval,theta,0);
+end
 
 
-
-
-
-
+% (1) Loop for i=1:m
+% 
+% (2) subsetX=X(1:i,:); subsetY=y(1:i,:);
+% 
+% (3) Obtain Theta for model (i) using trainLinearReg applying subset data and lambda
+% 
+% (4) error_train(i) = linearRegCostFunction applying subset data, Theta for model (i) and lambda=0
+% 
+% (5) error_val(i) = linearRegCostFunction applying ALL Xval and yval data, Theta for model(i) and lambda=0
 % -------------------------------------------------------------
 
 % =========================================================================
