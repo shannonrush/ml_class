@@ -50,7 +50,7 @@ fprintf('\nTraining Linear SVM ...\n')
 
 % You should try to change the C value below and see how the decision
 % boundary varies (e.g., try C = 1000)
-C = 1;
+C = 100;
 model = svmTrain(X, y, C, @linearKernel, 1e-3, 20);
 visualizeBoundaryLinear(X, y, model);
 
@@ -89,10 +89,10 @@ plotData(X, y);
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
-%% ========== Part 5: Training SVM with RBF Kernel (Dataset 2) ==========
-%  After you have implemented the kernel, we can now use it to train the 
-%  SVM classifier.
-% 
+% ========== Part 5: Training SVM with RBF Kernel (Dataset 2) ==========
+ After you have implemented the kernel, we can now use it to train the 
+ SVM classifier.
+
 fprintf('\nTraining SVM with RBF Kernel (this may take 1 to 2 minutes) ...\n');
 
 % Load from ex6data2: 
