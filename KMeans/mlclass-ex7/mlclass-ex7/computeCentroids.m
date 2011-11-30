@@ -25,9 +25,12 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
-
-
-
+for c=1:rows(centroids)
+	matches = find(idx==c);
+	if rows(matches)>0
+		centroids(c,:) = mean(X(matches,:));
+	end
+end
 
 
 

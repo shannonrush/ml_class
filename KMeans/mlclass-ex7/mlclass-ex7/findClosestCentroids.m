@@ -20,8 +20,16 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-
-
+for i=1:rows(X)
+	shortest = -1;
+	for j=1:K
+		d = norm(X(i,:)-centroids(j,:));
+		if shortest < 0 || d < shortest
+			shortest = d;
+			idx(i)=j;
+		end
+	end
+end
 
 
 
